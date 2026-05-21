@@ -1,80 +1,244 @@
-# Chat with Your PDFs using RAG
+# Chat with PDF using Local RAG
 
-This project allows you to upload a PDF and ask questions about its content using **Deepseek R1** via **Ollama**. The application processes PDFs, extracts text, indexes them into a vector store, and retrieves relevant context to generate concise answers.
+![Python](https://img.shields.io/badge/Python-3.11-blue)
+![Streamlit](https://img.shields.io/badge/Streamlit-AI_App-red)
+![LangChain](https://img.shields.io/badge/LangChain-RAG-green)
+![License](https://img.shields.io/badge/License-MIT-yellow)
 
-## Features
+A privacy-focused Retrieval-Augmented Generation (RAG) application that enables users to interact with PDF documents using natural language queries.
 
-- 📂 **Upload a PDF**: Select a PDF file to process.
-- 🔍 **Text Extraction & Indexing**: Extracts content and indexes it for efficient search.
-- 💡 **Question-Answering**: Ask questions related to the PDF content and get relevant answers.
-- 🚀 **Powered by Ollama & LangChain**: Uses `Deepseek R1` for embeddings and responses.
+Built with Streamlit, LangChain, Ollama, and DeepSeek-R1, the application processes PDFs locally, retrieves semantically relevant content, and generates concise AI-powered answers — all without external APIs.
 
-## Installation
+---
 
-### Prerequisites
+# Features
 
-- Python 3.8+
-- [Ollama](https://ollama.com) installed
-- Dependencies installed via pip
+- Semantic PDF search using vector embeddings
+- Context-aware question answering
+- Fully local RAG pipeline
+- Streamlit chat interface
+- In-memory vector indexing
+- Retrieval-based response generation
+- Modular LangChain pipeline
+- Privacy-friendly offline execution
 
-### Setup
+---
 
-1. Clone this repository:
+# Screenshots
 
-   ```sh
-   git clone https://github.com/hasan-py/chat-with-pdf-RAG.git
-   cd chat-with-pdf-RAG
-   ```
+## Upload Interface
+![Upload UI](images/upload-ui.png)
 
-   Activate your python env and install the dependencies.
+## Chat Interface
+![Chat UI](images/chat-ui.png)
 
-2. Install dependencies:
-   ```sh
-   pip install -r requirements.txt
-   ```
-3. Run the Streamlit app:
-   ```sh
-   streamlit run pdf_rag.py
-   ```
+## Response Generation
+![Response UI](images/response-ui.png)
 
-## How It Works
+---
 
-1. **Upload a PDF**: Use the UI to upload a document.
-2. **Processing**: The app extracts text and chunks it for indexing.
-3. **Ask Questions**: Enter a question in the chat box.
-4. **Get Answers**: The system retrieves relevant text and responds concisely.
+# Demo
 
-## How to change model?
+![Demo](images/demo.gif)
 
-To change the model used for inference, you can modify the `LLM` variable in the `pdf_rag.py` file. The `LLM` variable is initialized with the `deepseek-r1:8b` model by default. You can replace it with any other model supported by `Ollama`.
+---
 
-## File Structure
+# System Architecture
 
+```text
+PDF Upload
+    ↓
+Text Extraction
+    ↓
+Chunking
+    ↓
+Embedding Generation
+    ↓
+Vector Store
+    ↓
+Similarity Search
+    ↓
+LLM Response Generation
 ```
+
+---
+
+# Tech Stack
+
+| Technology | Purpose |
+|------------|----------|
+| Python | Core programming |
+| Streamlit | Frontend UI |
+| LangChain | RAG orchestration |
+| Ollama | Local LLM serving |
+| DeepSeek-R1 | Response generation |
+| PDFPlumber | PDF text extraction |
+
+---
+
+# How RAG Works
+
+1. PDF text is extracted using PDFPlumber.
+2. The text is split into overlapping chunks.
+3. Embeddings are generated using `nomic-embed-text`.
+4. Embeddings are stored inside an in-memory vector database.
+5. User queries are converted into embeddings.
+6. Similar chunks are retrieved using semantic similarity search.
+7. Retrieved context is passed to DeepSeek-R1 through Ollama.
+8. The LLM generates a concise contextual answer.
+
+---
+
+# Why Local LLMs?
+
+This project runs entirely offline using Ollama.
+
+## Benefits
+
+- No API costs
+- Better privacy
+- No internet dependency
+- Full local document security
+- Faster experimentation with open-source models
+
+---
+
+# Installation
+
+## Clone Repository
+
+```bash
+git clone https://github.com/your-username/chat-with-pdf-rag.git
+cd chat-with-pdf-rag
+```
+
+## Create Virtual Environment
+
+### Windows
+
+```bash
+python -m venv venv
+venv\Scripts\activate
+```
+
+### Linux / Mac
+
+```bash
+python -m venv venv
+source venv/bin/activate
+```
+
+---
+
+# Install Dependencies
+
+```bash
+pip install -r requirements.txt
+```
+
+---
+
+# Install Ollama
+
+Download and install Ollama from:
+
+https://ollama.com
+
+Pull the required models:
+
+```bash
+ollama pull deepseek-r1:8b
+ollama pull nomic-embed-text
+```
+
+---
+
+# Run the Application
+
+```bash
+streamlit run pdf_rag.py
+```
+
+---
+
+# Example Queries
+
+- Summarize this PDF
+- What are the key findings?
+- Explain chapter 2
+- What is the conclusion?
+- Give me a short overview
+
+---
+
+# Project Structure
+
+```bash
 chat-with-pdf/
-│── pdfs/                   # Directory for uploaded PDFs
-│── pdf_rag.py              # Main Streamlit app
-│── requirements.txt        # Dependencies
-│── README.md               # Documentation
-│── test_pdf_rag.py         # Unit Test 
+│
+├── pdfs/                 # Uploaded PDFs
+├── images/               # README assets
+├── pdf_rag.py            # Main Streamlit application
+├── test_pdf_rag.py       # Unit tests
+├── requirements.txt      # Project dependencies
+└── README.md             # Project documentation
 ```
 
-## Technologies Used
+---
 
-- **Python**
-- **Streamlit** (for UI)
-- **LangChain** (for text processing)
-- **Ollama** (for LLM inference)
-- **PDFPlumber** (for PDF extraction)
+# Future Improvements
 
-## Contributing
+- Multi-PDF support
+- Persistent vector database (ChromaDB)
+- Chat history memory
+- Source citation support
+- Cloud deployment
+- OCR support for scanned PDFs
 
-Feel free to submit issues and PRs to improve the project! And follow this steps:
+---
 
-- Before submitting PRs, please update the corresponding test cases. 
-- Please attach a screen recording video to the PR description showing that all functionality is working properly.
+# Contributing
 
+Contributions, issues, and feature requests are welcome.
 
-## Acknowledgments
+## Steps
 
-Special thanks to the creators of **LangChain**, **Ollama**, **Streamlit** and the **community** for enabling this functionality.
+1. Fork the repository
+2. Create a new feature branch
+3. Commit your changes
+4. Push the branch
+5. Open a Pull Request
+
+Please ensure:
+- Test cases are updated
+- Code is properly documented
+- PR includes demo screenshots or recordings
+
+---
+
+# Contributors
+
+- Divyansh — Frontend & UI
+- Pradhuman — Backend Pipeline
+- Kunal — Vector Search & Embeddings
+- Pratyush — Testing & Documentation
+
+---
+
+# License
+
+This project is licensed under the MIT License.
+
+---
+
+# Acknowledgments
+
+Special thanks to the teams behind:
+
+- LangChain
+- Ollama
+- Streamlit
+- DeepSeek
+- Open-source AI community
+
+for enabling local AI application development.
